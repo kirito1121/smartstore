@@ -1,0 +1,93 @@
+service_group|ServiceGroup
+id       name         parent_id
+1        Do uong      null
+2        Do an        null
+3        Cafe         1
+4        Tra sua      1
+5        Banh         2
+6        Pizza        2
+7        Combo        null
+
+
+units|Unit
+id        name
+1         ly
+2         cai
+3         suat
+
+services|Service
+id        name        price         price_promotion         active        service_group_id        all         unit_id      time        index        is_hot
+1         Cafe sua    10            0                       1             3                       true        1            10          0            1
+2         Tra sua     15            0                       1             4                       true        1            10          1            0
+3         Pizza Ca    100           0                       1             6                       true        2            10          2            1
+4         Pizza thit  100           0                       1             6                       true        2            10          3            0
+
+
+
+combos|Combo
+id        name        price         price_promotion         active        service_group_id        all         unit_id      time        index        is_hot
+1         Combo1      200           0                       1             7                       true        3            10          0            0
+2         Combo2      100           0                       1             7                       true        3            20          0            1
+3         Combo3      300           0                       1             7                       true        3            15          0            0
+
+
+combo_has_service|
+id_combo        id_service        quantity
+1               1                 1
+1               2                 1
+1               3                 2
+2               1                 1
+2               2                 1
+2               4                 2
+3               1                 1
+3               2                 1
+3               3                 2
+3               4                 2
+
+
+extras|Extra
+id          name
+1           size
+2           duong
+3           da
+4           topping
+
+
+options|Option
+id          value           price           extra_id          service_id
+1           M               0               1                 1
+2           L               10              1                 1
+3           M               0               1                 2
+4           L               10              1                 2
+5           M               50              1                 3
+6           L               90              1                 3
+7           M               50              1                 4
+8           L               90              1                 4
+9           50%             0               2                 1
+10          100%            0               2                 1
+11          50%             0               2                 2
+12          100%            0               2                 2
+13          50%             0               3                 1
+14          100%            0               3                 1
+15          50%             0               3                 2
+16          100%            0               3                 2
+17          thach           10              2                 1
+18          vai             10              2                 1
+19          nha             10              2                 2
+20          chanh           10              2                 2
+
+stores|Store
+id              name
+1               1
+
+
+store_options|StoreOption
+id              action            store_id            service_id            combo_id
+
+
+
+
+
+
+
+
