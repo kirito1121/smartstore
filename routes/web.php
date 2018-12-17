@@ -13,6 +13,9 @@
 use App\Combo;
 use App\Extra;
 use App\ServiceGroup;
+use App\User;
+use App\Order;
+// use App\User;
 
 Route::get('/services', function () {
 
@@ -98,3 +101,108 @@ Route::get('extras', function () {
 });
 
 
+//-----------------------------------------------------------------------------------------------------------------------
+//---------------------------Order----------------------- theo truong hop order - bill 1-1----------------------------------------------------------------
+
+ // ------------ customer -------
+
+Route::get('customer/orders', function () {
+    $user_id = request()->user_id;
+    $user = User::with('orders')->find($user_id);
+    return $user;
+});
+
+Route::get('customer/orders/{id}', function ($id) {
+    $user_id = request()->user_id;
+    $order = Order::with([
+        'orderDetails',
+        'bill' ,
+        'children' => function ($children){
+            $children->with(['bill' => function($bill){
+                $bill->with('user');
+            }]);
+        },
+        'parent' => function ($parent){
+            $parent->with(['bill' => function($bill){
+                $bill->with('user');
+            }]);
+        }
+    ])->where('id',$id)->get();
+    return $order;
+});
+
+ // ------------ customer end -------
+
+ // ------------ manager -------
+
+Route::get('manager/orders', function () {
+    $store_id = request()->store_id;
+    $order = Order::where('store_id',$store_id)->get();
+    return $order;
+});
+
+Route::get('manager/orders/{id}', function ($id) {
+    $store_id = request()->store_id;
+    $order = Order::with([
+        'orderDetails',
+        'bill' ,
+        'children' => function ($children){
+            $children->with(['bill' => function($bill){
+                $bill->with('user');
+            }]);
+        },
+        'parent' => function ($parent){
+            $parent->with(['bill' => function($bill){
+                $bill->with('user');
+            }]);
+        }
+    ])->where('id',$id)->where('store_id',$store_id)->get();
+    return $order;
+});
+
+ // ------------ manager end -------
+
+//-----------------------------------------------------------------------------------------------------------------------
+//---------------------------Order----------------------- theo truong hop order - bill 1-n----------------------------------------------------------------
+
+// customer
+Route::get('customer/ordersv2', function () {
+    $user_id = request()->user_id;
+    $user = User::with(['orders' => function ($order) use ($user_id){
+        $order->whereHas('bills', function($bill) use ($user_id){
+            $bill->where('user_id',$user_id);
+        });
+    }])->find($user_id);
+    return $user;
+});
+
+
+Route::get('customer/ordersv2/{id}', function ($id) {
+    $user_id = request()->user_id;
+    $order = Order::with([
+        'bills' => function ($bill){
+            $bill->with(['user','orderDetails']);
+        },
+    ])->where('id',$id)->get();
+    return $order;
+});
+// customer end
+
+// manager
+
+Route::get('manager/ordersv2', function () {
+    $store_id = request()->store_id;
+    $order = Order::where('store_id',$store_id)->get();
+    return $order;
+});
+
+Route::get('manager/ordersv2/{id}', function ($id) {
+    $order = Order::with([
+        'bills' => function ($bill){
+            $bill->with(['user','orderDetails']);
+        },
+    ])->where('id',$id)->get();
+    return $order;
+});
+
+// manager emd

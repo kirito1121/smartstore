@@ -28,12 +28,32 @@ class Order extends Model
         return $this->hasMany('App\OrderDetail');
     }
 
-    // public function bills(){
-    //     return $this->hasMany('App\Bill');
-    // }
+    public function bills(){
+        return $this->hasMany('App\Bill');
+    }
 
     public function bill(){
         return $this->hasOne('App\Bill');
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo('App\Order', 'parent_id');
+    }
+
+    // public function parents()
+    // {
+    //     return $this->parent();
+    // }
+
+    public function orders()
+    {
+        return $this->hasMany('App\Order', 'parent_id');
+    }
+
+    public function children()
+    {
+        return $this->orders()->with('children');
     }
 
 }

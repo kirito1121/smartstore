@@ -35,6 +35,7 @@ class CreateOrderTables extends Migration
             $table->string('note')->nullable();
             $table->string('status')->nullable();
             $table->integer('reason')->nullable();
+            $table->unsignedInteger('bill_id');
             $table->unsignedInteger('order_id');
             $table->unsignedInteger('service_id');
             $table->foreign('order_id')->references('id')->on('orders');

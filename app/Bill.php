@@ -27,4 +27,8 @@ class Bill extends Model
     public function order(){
         return $this->belongsTo('App\Order','order_id');
     }
+
+    public function orderDetails(){
+        return $this->hasMany('App\OrderDetail');
+    }
 }
