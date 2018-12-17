@@ -80,7 +80,7 @@ Route::get('services/extras/{id}', function ($id) {
 });
 
 Route::get('service_groups', function () {
-    $store_id = 2;
+    $store_id = request()->store;
     $services_groups = ServiceGroup::with(['children' => function ($query) {
         $query->withCount('services');
     }])->whereNull('parent_id')->where('brand_id', 1)->get();
@@ -89,7 +89,7 @@ Route::get('service_groups', function () {
 });
 
 Route::get('extras', function () {
-    $store_id = 2;
+    $store_id = request()->store;
     $extras = Extra::with('extraOptions')
         ->whereDoesntHave('storeOptions', function ($query) use ($store_id) {
             $query->where('store_id', $store_id)->whereAction(false);

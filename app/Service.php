@@ -56,4 +56,8 @@ class Service extends Model
         return $this->morphMany('App\Favorite', 'favoriteable');
     }
 
+    public function orderDetails(){
+        return $this->hasMany('App\OrderDetail');
+    }
+
 }

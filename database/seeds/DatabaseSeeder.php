@@ -214,6 +214,13 @@ class DatabaseSeeder extends Seeder
             ['name' => 'D', 'email' => "D@gmail.com", 'password' => 'admin'],
         ];
         DB::table('users')->insert($users);
+        $staffs = [
+            ['name' => 'E', 'email' => "E@gmail.com"],
+            ['name' => 'F', 'email' => "FA@gmail.com"],
+            ['name' => 'G', 'email' => "G@gmail.com"],
+            ['name' => 'H', 'email' => "H@gmail.com"],
+        ];
+        DB::table('staffs')->insert($staffs);
 
         $favorites = [
             ['user_id' => 1, 'favoriteable_id' => 1,'favoriteable_type' => "service" ],
@@ -235,6 +242,45 @@ class DatabaseSeeder extends Seeder
             ['user_id' => 3, 'favoriteable_id' => 5,'favoriteable_type' => "service" ],
         ];
         DB::table('favorites')->insert($favorites);
+
+        $orders = [
+            ['no' => 'NN001', 'total' => 30, 'status' => 'done', 'store_id' => 1, 'staff_id' => 1,'user_id' => 1],
+            ['no' => 'NN002', 'total' => 43, 'status' => 'done', 'store_id' => 1, 'staff_id' => 1,'user_id' => 1],
+            ['no' => 'NN003', 'total' => 56, 'status' => 'done', 'store_id' => 1, 'staff_id' => 1,'user_id' => 1],
+            ['no' => 'NN004', 'total' => 42, 'status' => 'done', 'store_id' => 1, 'staff_id' => 1,'user_id' => 1],
+        ];
+        DB::table('orders')->insert($orders);
+
+        $order_details = [
+            ['order_id' => 1, 'service_id' => 1, 'quantity' => 1, 'status' => 'done', 'note' => 1,'price'=>10],
+            ['order_id' => 1, 'service_id' => 2, 'quantity' => 1, 'status' => 'done', 'note' => 1,'price'=>10],
+            ['order_id' => 1, 'service_id' => 3, 'quantity' => 1, 'status' => 'done', 'note' => 1,'price'=>10],
+            ['order_id' => 1, 'service_id' => 4, 'quantity' => 1, 'status' => 'done', 'note' => 1,'price'=>10],
+
+            ['order_id' => 2, 'service_id' => 1, 'quantity' => 1, 'status' => 'done', 'note' => 1,'price'=>10],
+            ['order_id' => 2, 'service_id' => 2, 'quantity' => 1, 'status' => 'done', 'note' => 1,'price'=>10],
+            ['order_id' => 2, 'service_id' => 3, 'quantity' => 1, 'status' => 'done', 'note' => 1,'price'=>10],
+            ['order_id' => 2, 'service_id' => 4, 'quantity' => 1, 'status' => 'done', 'note' => 1,'price'=>10],
+
+            ['order_id' => 3, 'service_id' => 3, 'quantity' => 1, 'status' => 'done', 'note' => 1,'price'=>10],
+            ['order_id' => 3, 'service_id' => 4, 'quantity' => 1, 'status' => 'done', 'note' => 1,'price'=>10],
+            ['order_id' => 3, 'service_id' => 5, 'quantity' => 1, 'status' => 'done', 'note' => 1,'price'=>10],
+            ['order_id' => 3, 'service_id' => 6, 'quantity' => 1, 'status' => 'done', 'note' => 1,'price'=>10],
+
+            ['order_id' => 4, 'service_id' => 1, 'quantity' => 1, 'status' => 'done', 'note' => 1,'price'=>10],
+            ['order_id' => 4, 'service_id' => 3, 'quantity' => 1, 'status' => 'done', 'note' => 1,'price'=>10],
+            ['order_id' => 4, 'service_id' => 5, 'quantity' => 1, 'status' => 'done', 'note' => 1,'price'=>10],
+            ['order_id' => 4, 'service_id' => 6, 'quantity' => 1, 'status' => 'done', 'note' => 1,'price'=>10],
+        ];
+        DB::table('order_details')->insert($order_details);
+
+        $bills = [
+            ['order_id' => 1, 'amount' => 30, 'date_to_out' => now()->toDateTimeString(), 'date_to_join' => now()->toDateTimeString(), 'staff_id' => 1,'user_id' => 1],
+            ['order_id' => 2, 'amount' => 43, 'date_to_out' => now()->toDateTimeString(), 'date_to_join' => now()->toDateTimeString(), 'staff_id' => 1,'user_id' => 1],
+            ['order_id' => 3, 'amount' => 56, 'date_to_out' => now()->toDateTimeString(), 'date_to_join' => now()->toDateTimeString(), 'staff_id' => 1,'user_id' => 1],
+            ['order_id' => 4, 'amount' => 42, 'date_to_out' => now()->toDateTimeString(), 'date_to_join' => now()->toDateTimeString(), 'staff_id' => 1,'user_id' => 1],
+        ];
+        DB::table('bills')->insert($bills);
 
     }
 }

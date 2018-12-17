@@ -23,6 +23,15 @@ class CreateUsersTable extends Migration
             $table->timestamps();
         });
 
+        Schema::create('staffs', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
+            $table->rememberToken();
+            $table->timestamps();
+        });
+
         Schema::create('favorites', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('favoriteable_id');
@@ -40,6 +49,7 @@ class CreateUsersTable extends Migration
     public function down()
     {
         Schema::dropIfExists('users');
+        Schema::dropIfExists('staffs');
         Schema::dropIfExists('favoriteables');
     }
 }

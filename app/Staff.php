@@ -7,7 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class Staff extends Authenticatable
 {
     use Notifiable,HasRoles;
 
@@ -16,8 +16,10 @@ class User extends Authenticatable
      *
      * @var array
      */
+
+    protected $table = 'staffs';
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email',
     ];
 
     /**
@@ -36,4 +38,5 @@ class User extends Authenticatable
     public function bills(){
         return $this->hasMany('App\Bill');
     }
+
 }
