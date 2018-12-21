@@ -9,18 +9,17 @@ class Service extends Model
     protected $table = 'services';
 
     protected $fillable = [
-        'name', 'price', 'price_promotion', 'all', 'time', 'index', 'unit_id', 'brand_id', 'service_group_id','hot'
+        'name', 'price', 'price_promotion', 'all', 'time', 'index', 'unit_id', 'brand_id', 'service_group_id', 'hot',
     ];
 
     protected $hidden = [
-        'created_at','updated_at','service_group_id'
+        'created_at', 'updated_at', 'service_group_id',
     ];
 
     protected $casts = [
         'hot' => 'boolean',
         'all' => 'boolean',
     ];
-
 
     public function unit()
     {
@@ -56,8 +55,8 @@ class Service extends Model
         return $this->morphMany('App\Favorite', 'favoriteable');
     }
 
-    public function orderDetails(){
+    public function orderDetails()
+    {
         return $this->hasMany('App\OrderDetail');
     }
-
 }

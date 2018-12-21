@@ -12,7 +12,7 @@ class Extra extends Model
         'name', 'once', 'active',
     ];
 
-    protected $hidden = ['pivot','created_at','updated_at'];
+    protected $hidden = ['pivot', 'created_at', 'updated_at'];
 
     public function serviceOptions()
     {
@@ -27,5 +27,10 @@ class Extra extends Model
     public function storeOptions()
     {
         return $this->hasMany('App\StoreOption');
+    }
+
+    public function orderDetails()
+    {
+        return $this->belongsToMany('App\OrderDetail', 'order_detail_options', 'extra_id', 'order_detail_id')->withPivot('extra_name', 'extra_value', 'extra_price');
     }
 }
